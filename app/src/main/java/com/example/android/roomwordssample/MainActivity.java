@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     adapter.setWords(words);
                     Toast.makeText(
                             getApplicationContext(),
-                            "Basic Options",
+                            "Category 1",
                             Toast.LENGTH_LONG).show();
                 }
             });
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     adapter.setWords(words);
                     Toast.makeText(
                             getApplicationContext(),
-                            "Play Options",
+                            "Category 2",
                             Toast.LENGTH_LONG).show();
                 }
             });
