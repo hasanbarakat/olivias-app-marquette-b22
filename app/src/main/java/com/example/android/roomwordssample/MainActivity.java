@@ -61,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
         //Unload Intent to get Category
         String chosenCat = getIntent().getExtras().getString("CAT_KEY");
 
+        //File DIR
+        final String DIR = getFilesDir().toString();
+
         //Check what category and load
 
         // The onChanged() method fires when the observed data changes and the activity is
