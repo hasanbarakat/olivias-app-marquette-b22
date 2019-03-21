@@ -17,7 +17,6 @@ limitations under the License. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <EditText
         android:id="@+id/edit_word"
         android:layout_width="match_parent"
@@ -33,6 +32,15 @@ limitations under the License. -->
         android:id="@+id/category_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/button_getPic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="Choose Picture"
+        android:textColor="@color/buttonLabel" />
+
     <Button
         android:id="@+id/button_save"
         android:layout_width="match_parent"
@@ -40,5 +48,10 @@ limitations under the License. -->
         android:background="@color/colorPrimary"
         android:text="@string/button_save"
         android:textColor="@color/buttonLabel" />
+    <ImageView
+        android:id="@+id/picPreview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
 </LinearLayout>
