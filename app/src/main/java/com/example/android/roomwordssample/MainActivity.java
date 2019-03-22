@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         final WordListAdapter adapter = new WordListAdapter(this);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,4)); //Changed this
+        recyclerView.setLayoutManager(new GridLayoutManager(this,6)); //Changed this
 
         // Get a new or existing ViewModel from the ViewModelProvider.
         mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
@@ -79,10 +79,11 @@ public class MainActivity extends AppCompatActivity {
                 public void onChanged(@Nullable final List<Word> words) {
                     // Update the cached copy of the words in the adapter.
                     adapter.setWords(words);
-                    Toast.makeText(
-                            getApplicationContext(),
-                            "Category 1",
-                            Toast.LENGTH_LONG).show();
+                    setTitle("Category 1");
+                    //Toast.makeText(
+                      //      getApplicationContext(),
+                        //    "Category 1",
+                          //  Toast.LENGTH_LONG).show();
                 }
             });
         } //If Basic
@@ -92,10 +93,11 @@ public class MainActivity extends AppCompatActivity {
                 public void onChanged(@Nullable final List<Word> words) {
                     // Update the cached copy of the words in the adapter.
                     adapter.setWords(words);
-                    Toast.makeText(
-                            getApplicationContext(),
-                            DIR,
-                            Toast.LENGTH_LONG).show();
+                    setTitle("All");
+                   // Toast.makeText(
+                     //       getApplicationContext(),
+                       //     DIR,
+                         //   Toast.LENGTH_LONG).show();
                 }
             });
         } //Else if all
@@ -105,10 +107,11 @@ public class MainActivity extends AppCompatActivity {
                 public void onChanged(@Nullable final List<Word> words) {
                     // Update the cached copy of the words in the adapter.
                     adapter.setWords(words);
-                    Toast.makeText(
-                            getApplicationContext(),
-                            "Category 2",
-                            Toast.LENGTH_LONG).show();
+                    setTitle("Category 2");
+                   // Toast.makeText(
+                     //       getApplicationContext(),
+                       //     "Category 2",
+                         //   Toast.LENGTH_LONG).show();
                 }
             });
         } //Else if play

@@ -142,12 +142,10 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
             // Continue only if the File was successfully created
             if (photoFile != null) {
 
-                /*App Crashes Here*/
 
                 Uri photoURI = FileProvider.getUriForFile(this,
                         "com.example.android.roomwordsample.fileprovider",
                         photoFile);
-                /*.................*/
 
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
@@ -163,7 +161,7 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
         ImageView picPreview = findViewById(R.id.picPreview);
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
+            //Bundle extras = data.getExtras();
             //Bitmap imageBitmap = (Bitmap) extras.get("data");
             //Bitmap imageBitmap = (Bitmap) extras.get(MediaStore.EXTRA_OUTPUT); //Crashes
             BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
