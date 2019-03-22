@@ -17,6 +17,9 @@ public class Categories extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
+        setTitle("Library");
+
+        //Buttons for Categories
 
         final Button allButton = findViewById(R.id.button_all);
         allButton.setOnClickListener(new View.OnClickListener() {

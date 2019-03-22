@@ -17,10 +17,13 @@ package com.example.android.roomwordssample;
  */
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Collections;
@@ -31,10 +34,12 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
 
     class WordViewHolder extends RecyclerView.ViewHolder {
         private final TextView wordItemView;
+        private final ImageView wordImage;
 
         private WordViewHolder(View itemView) {
             super(itemView);
             wordItemView = itemView.findViewById(R.id.textView);
+            wordImage = itemView.findViewById(R.id.image);
         }
     }
 
@@ -53,8 +58,19 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
 
     @Override
     public void onBindViewHolder(WordViewHolder holder, int position) {
+
+        //Word Title
         Word current = mWords.get(position);
+
+        //Picture
         //Code to Get Picture, convert, and place goes here.
+        String imageDIR = current.getPicture();
+        BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+        Bitmap imageBitmap = BitmapFactory.decodeFile(imageDIR,bitmapOptions);
+
+
+        //Set Image and Word
+        holder.wordImage.setImageBitmap(imageBitmap);
         holder.wordItemView.setText(current.getWord());
     }
 

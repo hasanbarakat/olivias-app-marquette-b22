@@ -16,15 +16,19 @@ limitations under the License. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp">
-  
+    android:padding="6dp">
+
+    <ImageView
+        android:id="@+id/image"
+        android:adjustViewBounds="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:cropToPadding="true" />
     <TextView
         android:id="@+id/textView"
         style="@style/word_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_purple" />
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_corner" />
 </LinearLayout>

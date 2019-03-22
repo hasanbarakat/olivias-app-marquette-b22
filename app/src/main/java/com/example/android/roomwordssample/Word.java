@@ -43,17 +43,17 @@ public class Word {
     @NonNull
     @ColumnInfo(name = "category")
     private String mCategory;
-/*
+
     @NonNull
     @ColumnInfo(name = "picture")
-    private String mPic;
-*/
-    //public Word(@NonNull String word, @NonNull String category, @NonNull String picPath) {
-    public Word(@NonNull String word, @NonNull String category) {
+    private String mPicture;
+
+    public Word(@NonNull String word, @NonNull String category, @NonNull String picture) {
+    //public Word(@NonNull String word, @NonNull String category) {
     //public Word(@NonNull String word) {
         this.mWord = word;
         this.mCategory = category;
-        //this.mPic = picPath;
+        this.mPicture = picture;
     }
 
     @NonNull
@@ -65,11 +65,28 @@ public class Word {
     public String getCategory() {
         return this.mCategory;
     }
-    /*
+
     @NonNull
     public String getPicture() {
 
-        return this.mPic;
+        return this.mPicture;
+    }
+/*
+
+    @NonNull
+    public String setWord() {
+        return mWord;
+    }
+
+    @NonNull
+    public String setCategory() {
+        return mCategory;
+    }
+
+    @NonNull
+    public String setPic() {
+
+        return mPic;
     }
     */
 }

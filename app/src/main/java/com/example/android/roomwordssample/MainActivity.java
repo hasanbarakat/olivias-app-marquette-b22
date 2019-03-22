@@ -18,8 +18,10 @@ package com.example.android.roomwordssample;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         final WordListAdapter adapter = new WordListAdapter(this);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,4)); //Changed this
+        recyclerView.setLayoutManager(new GridLayoutManager(this,6)); //Changed this
 
         // Get a new or existing ViewModel from the ViewModelProvider.
         mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
@@ -63,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
 
         //File DIR
         final String DIR = getFilesDir().toString();
+       // final String DIR  = Environment.getExternalStoragePublicDirectory(
+         //       Environment.DIRECTORY_PICTURES).toString();
+        //final String picsDIR = getDir("Pictures", 0).toString();
 
         //Check what category and load
 
@@ -74,10 +79,11 @@ public class MainActivity extends AppCompatActivity {
                 public void onChanged(@Nullable final List<Word> words) {
                     // Update the cached copy of the words in the adapter.
                     adapter.setWords(words);
-                    Toast.makeText(
-                            getApplicationContext(),
-                            "Category 1",
-                            Toast.LENGTH_LONG).show();
+                    setTitle("Category 1");
+                    //Toast.makeText(
+                      //      getApplicationContext(),
+                        //    "Category 1",
+                          //  Toast.LENGTH_LONG).show();
                 }
             });
         } //If Basic
@@ -87,10 +93,11 @@ public class MainActivity extends AppCompatActivity {
                 public void onChanged(@Nullable final List<Word> words) {
                     // Update the cached copy of the words in the adapter.
                     adapter.setWords(words);
-                    Toast.makeText(
-                            getApplicationContext(),
-                            "All Options",
-                            Toast.LENGTH_LONG).show();
+                    setTitle("All");
+                   // Toast.makeText(
+                     //       getApplicationContext(),
+                       //     DIR,
+                         //   Toast.LENGTH_LONG).show();
                 }
             });
         } //Else if all
@@ -100,10 +107,11 @@ public class MainActivity extends AppCompatActivity {
                 public void onChanged(@Nullable final List<Word> words) {
                     // Update the cached copy of the words in the adapter.
                     adapter.setWords(words);
-                    Toast.makeText(
-                            getApplicationContext(),
-                            "Category 2",
-                            Toast.LENGTH_LONG).show();
+                    setTitle("Category 2");
+                   // Toast.makeText(
+                     //       getApplicationContext(),
+                       //     "Category 2",
+                         //   Toast.LENGTH_LONG).show();
                 }
             });
         } //Else if play
@@ -118,12 +126,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             //Word word = new Word(data.getStringExtra(NewWordActivity.WORD_REPLY));
-            Word word = new Word(data.getStringExtra(NewWordActivity.WORD_REPLY),data.getStringExtra(NewWordActivity.CAT_REPLY));
+            //Word word = new Word(data.getStringExtra(NewWordActivity.WORD_REPLY),data.getStringExtra(NewWordActivity.CAT_REPLY));
+            Word word = new Word(data.getStringExtra(NewWordActivity.WORD_REPLY),data.getStringExtra(NewWordActivity.CAT_REPLY), data.getStringExtra(NewWordActivity.PIC_REPLY));
+
             mWordViewModel.insert(word);
         } else {
             Toast.makeText(
@@ -132,4 +142,5 @@ public class MainActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
         }
     }
+
 }

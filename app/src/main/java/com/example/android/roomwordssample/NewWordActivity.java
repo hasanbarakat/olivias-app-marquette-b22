@@ -17,7 +17,13 @@ package com.example.android.roomwordssample;
  */
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -25,7 +31,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Activity for entering a word.
@@ -35,10 +48,16 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
 
     public static final String WORD_REPLY = "com.example.android.wordlistsql.WORD";
     public static final String CAT_REPLY = "com.example.android.wordlistsql.CAT";
+    public static final String PIC_REPLY = "com.example.android.wordlistsql.PIC";
 
+    static final int REQUEST_IMAGE_CAPTURE = 2;
+
+    //DIR for Pictures
+    //final String picsDIR = getDir("Pictures", 0).toString();
 
     private EditText mEditWordView;
     String wordCategory;
+    String wordPhotoDIR;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,25 +73,47 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
         categories.setAdapter(adapter);
         categories.setOnItemSelectedListener(this);
 
-        //Save Button
-        final Button button = findViewById(R.id.button_save);
-        button.setOnClickListener(new View.OnClickListener() {
+        //Choose Image Button
+        final Button choosePicButton = findViewById(R.id.button_getPic);
+        choosePicButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent replyIntent = new Intent();
-                if (TextUtils.isEmpty(mEditWordView.getText())) {
-                    setResult(RESULT_CANCELED, replyIntent);
-                } else {
-                    String word = mEditWordView.getText().toString();
-                    replyIntent.putExtra(WORD_REPLY, word);
-                    replyIntent.putExtra(CAT_REPLY, wordCategory);
-                    setResult(RESULT_OK, replyIntent);
-                }
-                finish();
+                TakePictureIntent();
+                //finish();
             }
+        });
+
+        //Save Button
+        final Button saveButton = findViewById(R.id.button_save);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                if(wordPhotoDIR != null) {
+                    Intent replyIntent = new Intent();
+                    if (TextUtils.isEmpty(mEditWordView.getText())) {
+                        setResult(RESULT_CANCELED, replyIntent);
+                    } else {
+                        String word = mEditWordView.getText().toString();
+
+                        //Send Info Back to Main Activity for Addition to Database
+                        replyIntent.putExtra(WORD_REPLY, word);
+                        replyIntent.putExtra(CAT_REPLY, wordCategory);
+                        replyIntent.putExtra(PIC_REPLY, wordPhotoDIR);
+                        setResult(RESULT_OK, replyIntent);
+                    }
+                    finish();
+                }
+                else {
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Need to Include Photo Before Saving!",
+                            Toast.LENGTH_LONG).show();
+                }
+                }
         });
 
     }
 
+    //Methods for Category Spinner
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         wordCategory = parent.getItemAtPosition(position).toString();
@@ -82,5 +123,72 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+    //Methods for Picture Selector
+    private void TakePictureIntent(){
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); //MediaStore.ACTION_IMAGE_CAPTURE
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+                Toast.makeText(
+                        getApplicationContext(),
+                        R.string.error_photo_file,
+                        Toast.LENGTH_LONG).show();
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+
+
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.example.android.roomwordsample.fileprovider",
+                        photoFile);
+
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            }
+
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        //Preview Image
+        ImageView picPreview = findViewById(R.id.picPreview);
+
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            //Bundle extras = data.getExtras();
+            //Bitmap imageBitmap = (Bitmap) extras.get("data");
+            //Bitmap imageBitmap = (Bitmap) extras.get(MediaStore.EXTRA_OUTPUT); //Crashes
+            BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+            Bitmap imageBitmap = BitmapFactory.decodeFile(wordPhotoDIR,bitmapOptions);
+            picPreview.setImageBitmap(imageBitmap);
+        }
+    }
+
+    private File createImageFile() throws IOException{
+
+        //Create Name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "word_" + timeStamp;
+        File storageDIR = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+            imageFileName, //Prefix
+            ".jpg",  //Suffix
+            storageDIR    //Directory
+        );
+
+        //Save file and path
+        wordPhotoDIR = image.getAbsolutePath();
+
+
+        return image;
+
+    }
+
 }
 

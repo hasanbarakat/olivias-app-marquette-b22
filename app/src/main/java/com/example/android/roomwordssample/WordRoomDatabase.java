@@ -24,12 +24,14 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
+import java.io.File;
+
 /**
  * This is the backend. The database. This used to be done by the OpenHelper.
  * The fact that this has very few comments emphasizes its coolness.
  */
 
-@Database(entities = {Word.class}, version = 2)
+@Database(entities = {Word.class}, version = 3)
 public abstract class WordRoomDatabase extends RoomDatabase {
 
     public abstract WordDao wordDao();
@@ -90,6 +92,10 @@ public abstract class WordRoomDatabase extends RoomDatabase {
             // Not needed if you only populate on creation.
             //mDao.deleteAll();
 
+            //Create Directory for Pictures
+            //File picDIR = Context.getDir("Pictures", Context.MODE_WORLD_READABLE);
+
+            /*
             Word word = new Word("Picture 1","Basic");
             mDao.insert(word);
             word = new Word("Picture 2","Basic");
@@ -100,7 +106,9 @@ public abstract class WordRoomDatabase extends RoomDatabase {
             mDao.insert(word);
             word = new Word("Picture 5","Basic");
             mDao.insert(word);
+            */
             return null;
+
         }
     }
 
