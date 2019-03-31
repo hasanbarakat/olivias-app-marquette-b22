@@ -50,7 +50,7 @@ public class StartScreen extends AppCompatActivity {
         if (requestCode == WORD_1_REQUEST_CODE && resultCode == RESULT_OK) {
 
             //Code to Get Picture, convert, and place goes here.
-            String imageDIR = data.getStringExtra(NewWordActivity.PIC_REPLY);//Get Image DIR From Intent
+            String imageDIR = data.getStringExtra(Categories.PIC_REPLY);//Get Image DIR From Intent
             BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
             Bitmap imageBitmap = BitmapFactory.decodeFile(imageDIR,bitmapOptions);
 
@@ -60,7 +60,7 @@ public class StartScreen extends AppCompatActivity {
         }
         else if(requestCode == WORD_2_REQUEST_CODE && resultCode == RESULT_OK) {
             //Code to Get Picture, convert, and place goes here.
-            String imageDIR = data.getStringExtra(NewWordActivity.PIC_REPLY);//Get Image DIR From Intent
+            String imageDIR = data.getStringExtra(Categories.PIC_REPLY);//Get Image DIR From Intent
             BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
             Bitmap imageBitmap = BitmapFactory.decodeFile(imageDIR,bitmapOptions);
 

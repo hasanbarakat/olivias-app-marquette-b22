@@ -39,6 +39,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements WordListAdapter.OnWordListener {
 
+    public static final String SELECTION_REPLY = "com.example.android.wordlistsql.SELECTION";
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
 
     private WordViewModel mWordViewModel;
@@ -145,6 +146,12 @@ public class MainActivity extends AppCompatActivity implements WordListAdapter.O
                 getApplicationContext(),
                 clicked.getWord(),
                 Toast.LENGTH_LONG).show();
+
+        Intent replyIntent = new Intent();
+        replyIntent.putExtra(SELECTION_REPLY, clicked.getPicture());
+        setResult(RESULT_OK, replyIntent);
+        finish();
+
 
     }
 }

@@ -19,20 +19,20 @@
 
         <ImageButton
             android:id="@+id/option1_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:baselineAlignBottom="true"
-            android:cropToPadding="true"
+            android:cropToPadding="false"
             app:srcCompat="@drawable/icon1" />
 
         <ImageButton
             android:id="@+id/option2_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:baselineAlignBottom="true"
-            android:cropToPadding="true"
+            android:cropToPadding="false"
             app:srcCompat="@drawable/icon2" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
