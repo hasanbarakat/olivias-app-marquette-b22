@@ -7,24 +7,32 @@
     tools:context=".StartScreen">
 
     <LinearLayout
-        android:layout_width="1266dp"
-        android:layout_height="715dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="6dp"
-        tools:layout_editor_absoluteY="8dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/option1_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:baselineAlignBottom="true"
+            android:cropToPadding="true"
             app:srcCompat="@drawable/icon1" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/option2_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:baselineAlignBottom="true"
+            android:cropToPadding="true"
             app:srcCompat="@drawable/icon2" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
