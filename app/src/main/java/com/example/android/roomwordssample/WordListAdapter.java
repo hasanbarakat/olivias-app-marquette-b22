@@ -32,28 +32,44 @@ import java.util.List;
 
 public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordViewHolder> {
 
-    class WordViewHolder extends RecyclerView.ViewHolder {
+    private OnWordListener mOnWordListener;
+
+    //Constructor
+    WordListAdapter(Context context,OnWordListener onWordListener) {
+        mInflater = LayoutInflater.from(context);
+        this.mOnWordListener = onWordListener;
+    }
+
+    class WordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView wordItemView;
         private final ImageView wordImage;
+        OnWordListener onWordListener;
 
-        private WordViewHolder(View itemView) {
+        private WordViewHolder(View itemView, OnWordListener onWordListener) {
             super(itemView);
             wordItemView = itemView.findViewById(R.id.textView);
             wordImage = itemView.findViewById(R.id.image);
+            this.onWordListener = onWordListener;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Word clicked = mWords.get(getAdapterPosition());
+            onWordListener.onWordClick(clicked);
+            //onWordListener.onWordClick(getAdapterPosition());
+
         }
     }
 
     private final LayoutInflater mInflater;
     private List<Word> mWords = Collections.emptyList(); // Cached copy of words
 
-    WordListAdapter(Context context) {
-        mInflater = LayoutInflater.from(context);
-    }
 
     @Override
     public WordViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.recyclerview_item, parent, false);
-        return new WordViewHolder(itemView);
+        return new WordViewHolder(itemView, mOnWordListener);
     }
 
     @Override
@@ -83,6 +99,11 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     public int getItemCount() {
         return mWords.size();
     }
+
+    public interface OnWordListener {
+        void onWordClick(Word clicked);
+    }
+
 }
 
 

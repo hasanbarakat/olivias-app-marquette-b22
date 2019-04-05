@@ -28,6 +28,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View.OnClickListener;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
@@ -36,8 +37,9 @@ import android.widget.GridLayout;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements WordListAdapter.OnWordListener {
 
+    public static final String SELECTION_REPLY = "com.example.android.wordlistsql.SELECTION";
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
 
     private WordViewModel mWordViewModel;
@@ -50,12 +52,15 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true); //Line to improve performance
-
-        final WordListAdapter adapter = new WordListAdapter(this);
+        final WordListAdapter adapter = new WordListAdapter(this, this);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,6)); //Changed this
+        recyclerView.setLayoutManager(new GridLayoutManager(this,6)); //Change this to change # of columns
+
+        //Selection Tracker
+        //SelectionTracker tracker
 
         // Get a new or existing ViewModel from the ViewModelProvider.
         mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
@@ -63,16 +68,6 @@ public class MainActivity extends AppCompatActivity {
         //Unload Intent to get Category
         String chosenCat = getIntent().getExtras().getString("CAT_KEY");
 
-        //File DIR
-        final String DIR = getFilesDir().toString();
-       // final String DIR  = Environment.getExternalStoragePublicDirectory(
-         //       Environment.DIRECTORY_PICTURES).toString();
-        //final String picsDIR = getDir("Pictures", 0).toString();
-
-        //Check what category and load
-
-        // The onChanged() method fires when the observed data changes and the activity is
-        // in the foreground.
         if(chosenCat.equals("BASIC")) {
             mWordViewModel.getBasicCatWords().observe(this, new Observer<List<Word>>() {
                 @Override
@@ -141,6 +136,22 @@ public class MainActivity extends AppCompatActivity {
                     R.string.empty_not_saved,
                     Toast.LENGTH_LONG).show();
         }
-    }
+    } //onActivityResult
 
+    @Override
+    public void onWordClick(Word clicked) {
+        //Navigate to new activity
+        //Use intent
+        Toast.makeText(
+                getApplicationContext(),
+                clicked.getWord(),
+                Toast.LENGTH_LONG).show();
+
+        Intent replyIntent = new Intent();
+        replyIntent.putExtra(SELECTION_REPLY, clicked.getPicture());
+        setResult(RESULT_OK, replyIntent);
+        finish();
+
+
+    }
 }
