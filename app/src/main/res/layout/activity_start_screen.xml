@@ -24,6 +24,7 @@
             android:layout_weight="1"
             android:baselineAlignBottom="true"
             android:cropToPadding="false"
+            android:scaleType="fitXY"
             app:srcCompat="@drawable/icon1" />
 
         <ImageButton
@@ -33,6 +34,7 @@
             android:layout_weight="1"
             android:baselineAlignBottom="true"
             android:cropToPadding="false"
+            android:scaleType="fitXY"
             app:srcCompat="@drawable/icon2" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

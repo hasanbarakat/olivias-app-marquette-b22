@@ -35,7 +35,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -59,6 +61,8 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
     String wordCategory;
     String wordPhotoDIR;
 
+    // Create the File where the photo should go
+    File photoFile = null;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,8 +132,7 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
     private void TakePictureIntent(){
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); //MediaStore.ACTION_IMAGE_CAPTURE
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            // Create the File where the photo should go
-            File photoFile = null;
+
             try {
                 photoFile = createImageFile();
             } catch (IOException ex) {
@@ -166,6 +169,29 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
             //Bitmap imageBitmap = (Bitmap) extras.get(MediaStore.EXTRA_OUTPUT); //Crashes
             BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
             Bitmap imageBitmap = BitmapFactory.decodeFile(wordPhotoDIR,bitmapOptions);
+            bitmapOptions.inJustDecodeBounds = true;
+            //Scale Image
+            //imageBitmap.reconfigure(720,720, Bitmap.Config.ALPHA_8);
+
+            //Compress
+            ByteArrayOutputStream photoStream = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 50,photoStream);
+            //Write Compressed Photo to file
+            try {
+                FileOutputStream fileOutputStream = new FileOutputStream(photoFile);
+                fileOutputStream.write(photoStream.toByteArray());
+                fileOutputStream.flush();
+                fileOutputStream.close();
+
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+                Toast.makeText(
+                        getApplicationContext(),
+                        R.string.error_photo_file,
+                        Toast.LENGTH_LONG).show();
+            }
+
+
             picPreview.setImageBitmap(imageBitmap);
         }
     }
