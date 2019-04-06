@@ -19,6 +19,7 @@ package com.example.android.roomwordssample;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +36,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     private OnWordListener mOnWordListener;
 
     //Constructor
-    WordListAdapter(Context context,OnWordListener onWordListener) {
+    WordListAdapter(Context context, OnWordListener onWordListener) {
         mInflater = LayoutInflater.from(context);
         this.mOnWordListener = onWordListener;
     }
@@ -76,16 +77,16 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     public void onBindViewHolder(WordViewHolder holder, int position) {
 
         //Word Title
-        Word current = mWords.get(position);
+        final Word current = mWords.get(position);
 
         //Picture
         //Code to Get Picture, convert, and place goes here.
         String imageDIR = current.getPicture();
         BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-        Bitmap imageBitmap = BitmapFactory.decodeFile(imageDIR,bitmapOptions);
-
+        Bitmap imageBitmap = BitmapFactory.decodeFile(imageDIR, bitmapOptions);
 
         //Set Image and Word
+
         holder.wordImage.setImageBitmap(imageBitmap);
         holder.wordItemView.setText(current.getWord());
     }
@@ -103,7 +104,24 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     public interface OnWordListener {
         void onWordClick(Word clicked);
     }
+/*
+    private static class loadPicAsyncTask extends AsyncTask<Word, Void, Void> {
 
+        private Word mWord;
+
+        loadPicAsyncTask(Word word) {
+            mWord = word;
+        }
+
+        @Override
+        protected Void doInBackground(final Word... params) {
+            String imageDIR = mWord.getPicture();
+            BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+            Bitmap imageBitmap = BitmapFactory.decodeFile(imageDIR, bitmapOptions);
+            return null;
+        }
+    }
+*/
 }
 
 

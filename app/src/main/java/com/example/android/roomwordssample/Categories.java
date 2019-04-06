@@ -58,7 +58,7 @@ public class Categories extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("CAT_KEY","PLAY");
                 intent.putExtras(bundle);
-                startActivity(intent);
+                startActivityForResult(intent,WORD_REQUEST_CODE);
             }
         }); //PlayButton Listener
     }//OnCreate
