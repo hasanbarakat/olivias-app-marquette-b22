@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class StartScreen extends AppCompatActivity {
                 startActivityForResult(intent1, WORD_1_REQUEST_CODE);
             }
         }); //option1Button Listener
+
         //Option 2
         option2Button = findViewById(R.id.option2_button);
         option2Button.setBackground(null);
@@ -42,6 +44,29 @@ public class StartScreen extends AppCompatActivity {
                 startActivityForResult(intent2, WORD_2_REQUEST_CODE);
             }
         }); //option2Button Listener
+
+
+        //Labels
+        final Button Option1Label = findViewById(R.id.option1_label);
+        final Button Option2Label = findViewById(R.id.option2_label);
+
+        //Option 1 Label
+        Option1Label.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    option2Button.setVisibility(View.INVISIBLE);
+                    Option2Label.setVisibility(View.INVISIBLE);
+            }
+        }); //Option1Label Listener
+
+        //Option 2 Label
+        Option2Label.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                option1Button.setVisibility(View.INVISIBLE);
+                Option1Label.setVisibility(View.INVISIBLE);
+            }
+        }); //Option1Label Listener
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

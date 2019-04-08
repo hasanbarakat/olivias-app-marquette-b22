@@ -31,6 +31,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View.OnClickListener;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import android.widget.GridLayout;
 
@@ -110,6 +111,8 @@ public class MainActivity extends AppCompatActivity implements WordListAdapter.O
                 }
             });
         } //Else if play
+
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
