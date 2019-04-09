@@ -82,7 +82,6 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
         choosePicButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 TakePictureIntent();
-                //finish();
             }
         });
 
