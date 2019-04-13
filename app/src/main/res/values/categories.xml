@@ -2,7 +2,8 @@
 <resources>
     <string-array name="word_categories">
         <item>Basic</item>
-        <item>Food</item>
         <item>Play</item>
+        <item>Food</item>
+        <item>Other</item>
     </string-array>
 </resources>

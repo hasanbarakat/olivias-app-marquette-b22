@@ -3,6 +3,7 @@ package com.example.android.roomwordssample;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -30,14 +31,39 @@ public class StartScreen extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+
+        //Labels
+        //final Button Option1Label = findViewById(R.id.option1_label);
+        //final Button Option2Label = findViewById(R.id.option2_label);
+        final FloatingActionButton Option1Label = findViewById(R.id.option1_label);
+        final FloatingActionButton Option2Label = findViewById(R.id.option2_label);
+        //Option 1 Label
+        Option1Label.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(StartScreen.this, Categories.class);
+                startActivityForResult(intent1, WORD_1_REQUEST_CODE);
+            }
+        }); //Option1Label Listener
+
+        //Option 2 Label
+        Option2Label.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(StartScreen.this, Categories.class);
+                startActivityForResult(intent2, WORD_2_REQUEST_CODE);
+            }
+        }); //Option1Label Listener
+
         //Option 1
         option1Button = (ImageButton) findViewById(R.id.option1_button);
         option1Button.setBackground(null);
         option1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(StartScreen.this, Categories.class);
-                startActivityForResult(intent1, WORD_1_REQUEST_CODE);
+                option2Button.setVisibility(View.INVISIBLE);
+                Option2Label.setVisibility(View.INVISIBLE);
+
             }
         }); //option1Button Listener
 
@@ -47,33 +73,11 @@ public class StartScreen extends AppCompatActivity {
         option2Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent(StartScreen.this, Categories.class);
-                startActivityForResult(intent2, WORD_2_REQUEST_CODE);
-            }
-        }); //option2Button Listener
-
-
-        //Labels
-        final Button Option1Label = findViewById(R.id.option1_label);
-        final Button Option2Label = findViewById(R.id.option2_label);
-
-        //Option 1 Label
-        Option1Label.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    option2Button.setVisibility(View.INVISIBLE);
-                    Option2Label.setVisibility(View.INVISIBLE);
-            }
-        }); //Option1Label Listener
-
-        //Option 2 Label
-        Option2Label.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 option1Button.setVisibility(View.INVISIBLE);
                 Option1Label.setVisibility(View.INVISIBLE);
             }
-        }); //Option1Label Listener
+        }); //option2Button Listener
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

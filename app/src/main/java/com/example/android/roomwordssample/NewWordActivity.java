@@ -39,6 +39,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -53,6 +54,7 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
     public static final String PIC_REPLY = "com.example.android.wordlistsql.PIC";
 
     static final int REQUEST_IMAGE_CAPTURE = 2;
+    static final int REQUEST_IMAGE_CHOOSE = 3;
 
     //DIR for Pictures
     //final String picsDIR = getDir("Pictures", 0).toString();
@@ -77,11 +79,19 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
         categories.setAdapter(adapter);
         categories.setOnItemSelectedListener(this);
 
-        //Choose Image Button
-        final Button choosePicButton = findViewById(R.id.button_getPic);
-        choosePicButton.setOnClickListener(new View.OnClickListener() {
+        //Take Image From Camera Button
+        final Button TakePicButton = findViewById(R.id.button_getPic_from_camera);
+        TakePicButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 TakePictureIntent();
+            }
+        });
+
+        //Choose Image From Gallery Button
+        final Button ChoosePicButton = findViewById(R.id.button_getPic_from_gallery);
+        ChoosePicButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                ChoosePictureIntent();
             }
         });
 
@@ -127,7 +137,7 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
 
     }
 
-    //Methods for Picture Selector
+    //Methods for Camera Intent
     private void TakePictureIntent(){
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); //MediaStore.ACTION_IMAGE_CAPTURE
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -155,6 +165,28 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
 
         }
     }
+    //Method for Choosing picture from file
+    private void ChoosePictureIntent(){
+        try {
+            photoFile = createImageFile();
+        } catch (IOException ex) {
+            // Error occurred while creating the File
+            Toast.makeText(
+                    getApplicationContext(),
+                    R.string.error_photo_file,
+                    Toast.LENGTH_LONG).show();
+        }
+        // Continue only if the File was successfully created
+        if (photoFile != null) {
+
+            Uri photoURI = FileProvider.getUriForFile(this,
+                    "com.example.android.roomwordsample.fileprovider",
+                    photoFile);
+
+            Intent ChoosePictureIntent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(ChoosePictureIntent, REQUEST_IMAGE_CHOOSE);
+        }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -163,20 +195,16 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
         ImageView picPreview = findViewById(R.id.picPreview);
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            //Bundle extras = data.getExtras();
-            //Bitmap imageBitmap = (Bitmap) extras.get("data");
-            //Bitmap imageBitmap = (Bitmap) extras.get(MediaStore.EXTRA_OUTPUT); //Crashes
             BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
             Bitmap imageBitmap = BitmapFactory.decodeFile(wordPhotoDIR,bitmapOptions);
             bitmapOptions.inJustDecodeBounds = true;
-            //Scale Image
-            //imageBitmap.reconfigure(720,720, Bitmap.Config.ALPHA_8);
 
             //Compress
             ByteArrayOutputStream photoStream = new ByteArrayOutputStream();
-            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 50,photoStream);
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20,photoStream);
             //Write Compressed Photo to file
             try {
+
                 FileOutputStream fileOutputStream = new FileOutputStream(photoFile);
                 fileOutputStream.write(photoStream.toByteArray());
                 fileOutputStream.flush();
@@ -192,6 +220,37 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
 
 
             picPreview.setImageBitmap(imageBitmap);
+        }
+
+        else if (requestCode == REQUEST_IMAGE_CHOOSE && resultCode == RESULT_OK) {
+            Uri photoURI = data.getData();
+            //File imageFile = new File(photoURI);
+
+
+            BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+            try {
+                Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoURI);
+                bitmapOptions.inJustDecodeBounds = true;
+
+                //Compress
+                ByteArrayOutputStream photoStream = new ByteArrayOutputStream();
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20,photoStream);
+                picPreview.setImageBitmap(imageBitmap);
+
+                //Save to DB
+
+                FileOutputStream fileOutputStream = new FileOutputStream(photoFile);
+                fileOutputStream.write(photoStream.toByteArray());
+                fileOutputStream.flush();
+                fileOutputStream.close();
+
+            }catch (IOException ex) {
+                // Error occurred while creating the File
+                Toast.makeText(
+                        getApplicationContext(),
+                        R.string.error_photo_file,
+                        Toast.LENGTH_LONG).show();
+            }
         }
     }
 

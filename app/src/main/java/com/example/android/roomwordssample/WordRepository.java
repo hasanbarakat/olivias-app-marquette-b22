@@ -32,11 +32,16 @@ class WordRepository {
     //Strings for Categories
     private String CAT_BASIC = "Basic";
     private String CAT_PLAY = "Play";
+    private String CAT_FOOD = "Food";
+    private String CAT_OTHER = "Other";
 
     private WordDao mWordDao;
+    private Word mWord;
     private LiveData<List<Word>> mAllWords;
     private LiveData<List<Word>> mBasicCatWords;
     private LiveData<List<Word>> mPlayCatWords;
+    private LiveData<List<Word>> mFoodCatWords;
+    private LiveData<List<Word>> mOtherCatWords;
 
     // Note that in order to unit test the WordRepository, you have to remove the Application
     // dependency. This adds complexity and much more code, and this sample is not about testing.
@@ -45,9 +50,12 @@ class WordRepository {
     WordRepository(Application application) {
         WordRoomDatabase db = WordRoomDatabase.getDatabase(application);
         mWordDao = db.wordDao();
+        //mWord = mWordDao.findWord(String search)
         mAllWords = mWordDao.getAlphabetizedWords();
         mBasicCatWords = mWordDao.findWordInCategory(CAT_BASIC);
         mPlayCatWords = mWordDao.findWordInCategory(CAT_PLAY);
+        mFoodCatWords = mWordDao.findWordInCategory(CAT_FOOD);
+        mOtherCatWords = mWordDao.findWordInCategory(CAT_OTHER);
     }
 
     // Room executes all queries on a separate thread.
@@ -61,6 +69,12 @@ class WordRepository {
     }
     LiveData<List<Word>> getmPlayCatWords() {
         return mPlayCatWords;
+    }
+    LiveData<List<Word>> getmFoodCatWords() {
+        return mFoodCatWords;
+    }
+    LiveData<List<Word>> getmOtherCatWords() {
+        return mOtherCatWords;
     }
     // You must call this on a non-UI thread or your app will crash.
     // Like this, Room ensures that you're not doing any long running operations on the main

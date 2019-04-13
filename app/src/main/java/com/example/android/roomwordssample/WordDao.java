@@ -62,5 +62,6 @@ public interface WordDao {
     public LiveData<List<Word>> findWordInCategory(String search);
 
     @Query("SELECT * FROM word_table WHERE word LIKE :search ")
-    public LiveData<List<Word>> findWord(String search);
+    public Word findWord(String search);
+    //public LiveData<List<Word>> findWord(String search);
 }

@@ -46,11 +46,20 @@
                 android:cropToPadding="false"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/icon1" />
-            <Button
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/option1_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginBottom="@dimen/small_padding"
+                android:src="@drawable/gallery"
+                app:fabSize="mini"/>
+            <!--<Button
                 android:id="@+id/option1_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select"/>
+                android:text="Select"/>-->
         </LinearLayout>
 
         <LinearLayout
@@ -70,11 +79,19 @@
                 android:cropToPadding="false"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/icon2" />
-            <Button
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/option2_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginBottom="@dimen/small_padding"
+                android:src="@drawable/gallery"
+                app:fabSize="mini"/>
+           <!-- <Button
                 android:id="@+id/option2_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select"/>
+                android:text="Select"/>-->
         </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

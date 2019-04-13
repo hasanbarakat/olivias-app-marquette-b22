@@ -16,16 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-<!--
-        <TextView
-            android:id="@+id/Category_Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Library"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="40sp"
-            android:layout_gravity="center" />
--->
+
         <Button
             android:id="@+id/button_all"
             android:layout_width="match_parent"
@@ -36,12 +27,22 @@
             android:id="@+id/button_basic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Category 1" />
+            android:text="Basic" />
 
         <Button
             android:id="@+id/button_play"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Category 2" />
+            android:text="Play" />
+        <Button
+            android:id="@+id/button_food"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Food" />
+        <Button
+            android:id="@+id/button_other"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Other" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

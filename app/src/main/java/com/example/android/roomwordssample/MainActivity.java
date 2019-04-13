@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements WordListAdapter.O
                 public void onChanged(@Nullable final List<Word> words) {
                     // Update the cached copy of the words in the adapter.
                     adapter.setWords(words);
-                    setTitle("Category 1");
+                    setTitle("Basic");
                     //Toast.makeText(
                       //      getApplicationContext(),
                         //    "Category 1",
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements WordListAdapter.O
                 public void onChanged(@Nullable final List<Word> words) {
                     // Update the cached copy of the words in the adapter.
                     adapter.setWords(words);
-                    setTitle("Category 2");
+                    setTitle("Play");
                    // Toast.makeText(
                      //       getApplicationContext(),
                        //     "Category 2",
@@ -111,8 +111,34 @@ public class MainActivity extends AppCompatActivity implements WordListAdapter.O
                 }
             });
         } //Else if play
-
-
+        else if(chosenCat.equals("FOOD")) {
+            mWordViewModel.getFoodCatWords().observe(this, new Observer<List<Word>>() {
+                @Override
+                public void onChanged(@Nullable final List<Word> words) {
+                    // Update the cached copy of the words in the adapter.
+                    adapter.setWords(words);
+                    setTitle("Food");
+                    // Toast.makeText(
+                    //       getApplicationContext(),
+                    //     "Category 2",
+                    //   Toast.LENGTH_LONG).show();
+                }
+            });
+        } //Else if play
+        else if(chosenCat.equals("OTHER")) {
+            mWordViewModel.getOtherCatWords().observe(this, new Observer<List<Word>>() {
+                @Override
+                public void onChanged(@Nullable final List<Word> words) {
+                    // Update the cached copy of the words in the adapter.
+                    adapter.setWords(words);
+                    setTitle("Other");
+                    // Toast.makeText(
+                    //       getApplicationContext(),
+                    //     "Category 2",
+                    //   Toast.LENGTH_LONG).show();
+                }
+            });
+        } //Else if play
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

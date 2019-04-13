@@ -37,6 +37,8 @@ public class WordViewModel extends AndroidViewModel {
     private LiveData<List<Word>> mAllWords;
     private LiveData<List<Word>> mBasicCatWords;
     private LiveData<List<Word>> mPlayCatWords;
+    private LiveData<List<Word>> mFoodCatWords;
+    private LiveData<List<Word>> mOtherCatWords;
 
     public WordViewModel(Application application) {
         super(application);
@@ -44,6 +46,8 @@ public class WordViewModel extends AndroidViewModel {
         mAllWords = mRepository.getAllWords();
         mBasicCatWords = mRepository.getmBasicCatWords();
         mPlayCatWords = mRepository.getmPlayCatWords();
+        mFoodCatWords = mRepository.getmFoodCatWords();
+        mOtherCatWords = mRepository.getmOtherCatWords();
     }
 
     LiveData<List<Word>> getAllWords() {
@@ -56,6 +60,12 @@ public class WordViewModel extends AndroidViewModel {
 
     LiveData<List<Word>> getPlayCatWords() {
         return mPlayCatWords;
+    }
+    LiveData<List<Word>> getFoodCatWords() {
+        return mFoodCatWords;
+    }
+    LiveData<List<Word>> getOtherCatWords() {
+        return mOtherCatWords;
     }
     void insert(Word word) {
         mRepository.insert(word);

@@ -50,6 +50,7 @@ public class Categories extends AppCompatActivity {
                 startActivityForResult(intent,WORD_REQUEST_CODE);
             }
         }); //BasicButton Listener
+
         final Button PlayButton = findViewById(R.id.button_play);
         PlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +62,29 @@ public class Categories extends AppCompatActivity {
                 startActivityForResult(intent,WORD_REQUEST_CODE);
             }
         }); //PlayButton Listener
+
+        final Button FoodButton = findViewById(R.id.button_food);
+        FoodButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Categories.this, MainActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("CAT_KEY","FOOD");
+                intent.putExtras(bundle);
+                startActivityForResult(intent,WORD_REQUEST_CODE);
+            }
+        }); //FoodButton Listener
+        final Button OtherButton = findViewById(R.id.button_other);
+        OtherButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Categories.this, MainActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("CAT_KEY","OTHER");
+                intent.putExtras(bundle);
+                startActivityForResult(intent,WORD_REQUEST_CODE);
+            }
+        }); //FoodButton Listener
     }//OnCreate
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
