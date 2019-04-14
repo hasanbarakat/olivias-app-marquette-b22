@@ -19,6 +19,7 @@ package com.example.android.roomwordssample;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -52,6 +53,7 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
     public static final String WORD_REPLY = "com.example.android.wordlistsql.WORD";
     public static final String CAT_REPLY = "com.example.android.wordlistsql.CAT";
     public static final String PIC_REPLY = "com.example.android.wordlistsql.PIC";
+    public static final String THUMB_REPLY = "com.example.android.wordlistsql.THUMB";
 
     static final int REQUEST_IMAGE_CAPTURE = 2;
     static final int REQUEST_IMAGE_CHOOSE = 3;
@@ -62,9 +64,14 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
     private EditText mEditWordView;
     String wordCategory;
     String wordPhotoDIR;
+    String ThumbnailDIR;
+
+    final int thumbSize = 480;
+
 
     // Create the File where the photo should go
     File photoFile = null;
+    File thumbnailFile = null;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +118,7 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
                         replyIntent.putExtra(WORD_REPLY, word);
                         replyIntent.putExtra(CAT_REPLY, wordCategory);
                         replyIntent.putExtra(PIC_REPLY, wordPhotoDIR);
+                        replyIntent.putExtra(THUMB_REPLY, ThumbnailDIR);
                         setResult(RESULT_OK, replyIntent);
                     }
                     finish();
@@ -144,6 +152,13 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
 
             try {
                 photoFile = createImageFile();
+                //Save path
+                wordPhotoDIR = photoFile.getAbsolutePath();
+
+                thumbnailFile = createImageFile();
+                //Save path
+                ThumbnailDIR = thumbnailFile.getAbsolutePath();
+
             } catch (IOException ex) {
                 // Error occurred while creating the File
                 Toast.makeText(
@@ -193,7 +208,9 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
 
         //Preview Image
         ImageView picPreview = findViewById(R.id.picPreview);
+        Bitmap ThumbnailBitmap;
 
+        //Full Size
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
             Bitmap imageBitmap = BitmapFactory.decodeFile(wordPhotoDIR,bitmapOptions);
@@ -219,23 +236,60 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
             }
 
 
-            picPreview.setImageBitmap(imageBitmap);
+            //Thumbnail
+            ThumbnailBitmap= ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(wordPhotoDIR),
+                    thumbSize, thumbSize);
+
+            try {
+                bitmapOptions.inJustDecodeBounds = true;
+
+                //Compress
+                ByteArrayOutputStream ThumbnailStream = new ByteArrayOutputStream();
+                ThumbnailBitmap.compress(Bitmap.CompressFormat.JPEG, 50,ThumbnailStream);
+
+                //Save to DB
+
+                FileOutputStream fileOutputStream = new FileOutputStream(thumbnailFile);
+                fileOutputStream.write(ThumbnailStream.toByteArray());
+                fileOutputStream.flush();
+                fileOutputStream.close();
+
+                picPreview.setImageBitmap(ThumbnailBitmap);
+
+            }catch (IOException ex) {
+                // Error occurred while creating the File
+                Toast.makeText(
+                        getApplicationContext(),
+                        R.string.error_photo_file,
+                        Toast.LENGTH_LONG).show();
+            }
+
+
+            //picPreview.setImageBitmap(imageBitmap);
         }
 
         else if (requestCode == REQUEST_IMAGE_CHOOSE && resultCode == RESULT_OK) {
             Uri photoURI = data.getData();
+            Bitmap imageBitmap;
             //File imageFile = new File(photoURI);
 
-
+            //Full Size
             BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
             try {
-                Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoURI);
+                imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoURI);
                 bitmapOptions.inJustDecodeBounds = true;
 
                 //Compress
                 ByteArrayOutputStream photoStream = new ByteArrayOutputStream();
-                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20,photoStream);
-                picPreview.setImageBitmap(imageBitmap);
+                ByteArrayOutputStream ThumbnailStream = new ByteArrayOutputStream();
+
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 50,photoStream);
+
+                ThumbnailBitmap= ThumbnailUtils.extractThumbnail(imageBitmap,
+                        thumbSize, thumbSize);
+
+                //picPreview.setImageBitmap(imageBitmap);
+                picPreview.setImageBitmap(ThumbnailBitmap);
 
                 //Save to DB
 
@@ -243,6 +297,11 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
                 fileOutputStream.write(photoStream.toByteArray());
                 fileOutputStream.flush();
                 fileOutputStream.close();
+
+                FileOutputStream fileOutputStreamT = new FileOutputStream(thumbnailFile);
+                fileOutputStreamT.write(ThumbnailStream.toByteArray());
+                fileOutputStreamT.flush();
+                fileOutputStreamT.close();
 
             }catch (IOException ex) {
                 // Error occurred while creating the File
@@ -265,9 +324,6 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
             ".jpg",  //Suffix
             storageDIR    //Directory
         );
-
-        //Save file and path
-        wordPhotoDIR = image.getAbsolutePath();
 
 
         return image;

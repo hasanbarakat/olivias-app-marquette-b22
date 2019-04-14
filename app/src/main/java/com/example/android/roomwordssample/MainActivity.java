@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements WordListAdapter.O
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             //Word word = new Word(data.getStringExtra(NewWordActivity.WORD_REPLY));
             //Word word = new Word(data.getStringExtra(NewWordActivity.WORD_REPLY),data.getStringExtra(NewWordActivity.CAT_REPLY));
-            Word word = new Word(data.getStringExtra(NewWordActivity.WORD_REPLY),data.getStringExtra(NewWordActivity.CAT_REPLY), data.getStringExtra(NewWordActivity.PIC_REPLY));
+            Word word = new Word(data.getStringExtra(NewWordActivity.WORD_REPLY),data.getStringExtra(NewWordActivity.CAT_REPLY), data.getStringExtra(NewWordActivity.PIC_REPLY),data.getStringExtra(NewWordActivity.THUMB_REPLY));
 
             mWordViewModel.insert(word);
         } else {

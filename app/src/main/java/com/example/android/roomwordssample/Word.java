@@ -48,12 +48,19 @@ public class Word {
     @ColumnInfo(name = "picture")
     private String mPicture;
 
-    public Word(@NonNull String word, @NonNull String category, @NonNull String picture) {
+
+    @NonNull
+    @ColumnInfo(name = "thumbnail")
+    private String mThumbnail;
+
+    public Word(@NonNull String word, @NonNull String category, @NonNull String picture, @NonNull String thumbnail) {
+    //public Word(@NonNull String word, @NonNull String category, @NonNull String picture, @NonNull String thumbnail) {
     //public Word(@NonNull String word, @NonNull String category) {
     //public Word(@NonNull String word) {
         this.mWord = word;
         this.mCategory = category;
         this.mPicture = picture;
+        this.mThumbnail = thumbnail;
     }
 
     @NonNull
@@ -70,6 +77,12 @@ public class Word {
     public String getPicture() {
 
         return this.mPicture;
+    }
+
+    @NonNull
+    public String getThumbnail() {
+
+        return this.mThumbnail;
     }
 /*
 

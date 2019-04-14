@@ -31,7 +31,7 @@ import java.io.File;
  * The fact that this has very few comments emphasizes its coolness.
  */
 
-@Database(entities = {Word.class}, version = 3)
+@Database(entities = {Word.class}, version = 4)
 public abstract class WordRoomDatabase extends RoomDatabase {
 
     public abstract WordDao wordDao();

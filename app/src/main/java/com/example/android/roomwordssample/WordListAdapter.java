@@ -81,7 +81,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
 
         //Picture
         //Code to Get Picture, convert, and place goes here.
-        String imageDIR = current.getPicture();
+        String imageDIR = current.getThumbnail();
         BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
         Bitmap imageBitmap = BitmapFactory.decodeFile(imageDIR, bitmapOptions);
 
