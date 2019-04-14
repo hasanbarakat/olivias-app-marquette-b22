@@ -20,6 +20,7 @@ public class StartScreen extends AppCompatActivity {
     public static final int WORD_1_REQUEST_CODE = 2;
     public static final int WORD_2_REQUEST_CODE = 3;
 
+
     ImageButton option1Button;
     ImageButton option2Button;
 
@@ -125,7 +126,10 @@ public class StartScreen extends AppCompatActivity {
                 // User chooses clear button
                 this.recreate(); //Restart current activity
                 return true;
-
+           /* case R.id.database_edit_button:
+                Intent editIntent = new Intent(StartScreen.this, Categories.class);
+                startActivity(editIntent);
+                return true;*/
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
