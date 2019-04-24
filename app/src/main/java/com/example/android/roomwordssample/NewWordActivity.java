@@ -95,13 +95,13 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
         });
 
         //Choose Image From Gallery Button
-        final Button ChoosePicButton = findViewById(R.id.button_getPic_from_gallery);
-        ChoosePicButton.setOnClickListener(new View.OnClickListener() {
+        //final Button ChoosePicButton = findViewById(R.id.button_getPic_from_gallery);
+        /*ChoosePicButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 ChoosePictureIntent();
             }
         });
-
+*/
         //Save Button
         final Button saveButton = findViewById(R.id.button_save);
 
@@ -184,6 +184,12 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
     private void ChoosePictureIntent(){
         try {
             photoFile = createImageFile();
+            //Save path
+            wordPhotoDIR = photoFile.getAbsolutePath();
+
+            thumbnailFile = createImageFile();
+            //Save path
+            ThumbnailDIR = thumbnailFile.getAbsolutePath();
         } catch (IOException ex) {
             // Error occurred while creating the File
             Toast.makeText(
@@ -254,7 +260,7 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
                 fileOutputStream.flush();
                 fileOutputStream.close();
 
-                picPreview.setImageBitmap(ThumbnailBitmap);
+                //picPreview.setImageBitmap(ThumbnailBitmap);
 
             }catch (IOException ex) {
                 // Error occurred while creating the File
@@ -265,10 +271,40 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
             }
 
 
-            //picPreview.setImageBitmap(imageBitmap);
+            picPreview.setImageBitmap(imageBitmap);
         }
 
         else if (requestCode == REQUEST_IMAGE_CHOOSE && resultCode == RESULT_OK) {
+
+            Uri photoURI = data.getData();
+            //File imageFile = new File(photoURI);
+
+
+            BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+            try {
+                Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoURI);
+                bitmapOptions.inJustDecodeBounds = true;
+
+                //Compress
+                ByteArrayOutputStream photoStream = new ByteArrayOutputStream();
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20,photoStream);
+                picPreview.setImageBitmap(imageBitmap);
+
+                //Save to DB
+
+                FileOutputStream fileOutputStream = new FileOutputStream(photoFile);
+                fileOutputStream.write(photoStream.toByteArray());
+                fileOutputStream.flush();
+                fileOutputStream.close();
+
+            }catch (IOException ex) {
+                // Error occurred while creating the File
+                Toast.makeText(
+                        getApplicationContext(),
+                        R.string.error_photo_file,
+                        Toast.LENGTH_LONG).show();
+            }
+            /*
             Uri photoURI = data.getData();
             Bitmap imageBitmap;
             //File imageFile = new File(photoURI);
@@ -281,15 +317,14 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
 
                 //Compress
                 ByteArrayOutputStream photoStream = new ByteArrayOutputStream();
-                ByteArrayOutputStream ThumbnailStream = new ByteArrayOutputStream();
+                //ByteArrayOutputStream ThumbnailStream = new ByteArrayOutputStream();
 
                 imageBitmap.compress(Bitmap.CompressFormat.JPEG, 50,photoStream);
 
-                ThumbnailBitmap= ThumbnailUtils.extractThumbnail(imageBitmap,
-                        thumbSize, thumbSize);
+                //ThumbnailBitmap= ThumbnailUtils.extractThumbnail(imageBitmap,thumbSize, thumbSize);
 
-                //picPreview.setImageBitmap(imageBitmap);
-                picPreview.setImageBitmap(ThumbnailBitmap);
+                picPreview.setImageBitmap(imageBitmap);
+                //picPreview.setImageBitmap(ThumbnailBitmap);
 
                 //Save to DB
 
@@ -298,10 +333,12 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
                 fileOutputStream.flush();
                 fileOutputStream.close();
 
+                /*
                 FileOutputStream fileOutputStreamT = new FileOutputStream(thumbnailFile);
                 fileOutputStreamT.write(ThumbnailStream.toByteArray());
                 fileOutputStreamT.flush();
                 fileOutputStreamT.close();
+
 
             }catch (IOException ex) {
                 // Error occurred while creating the File
@@ -309,7 +346,9 @@ public class NewWordActivity extends AppCompatActivity implements AdapterView.On
                         getApplicationContext(),
                         R.string.error_photo_file,
                         Toast.LENGTH_LONG).show();
-            }
+            }*/
+
+
         }
     }
 

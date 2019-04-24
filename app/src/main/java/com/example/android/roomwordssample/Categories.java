@@ -74,6 +74,115 @@ public class Categories extends AppCompatActivity {
                 startActivityForResult(intent,WORD_REQUEST_CODE);
             }
         }); //FoodButton Listener
+
+        final Button ReadingButton = findViewById(R.id.button_reading);
+        ReadingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Categories.this, MainActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("CAT_KEY","READING");
+                intent.putExtras(bundle);
+                startActivityForResult(intent,WORD_REQUEST_CODE);
+            }
+        }); //ReadingButton Listener
+
+        final Button MathButton = findViewById(R.id.button_math);
+        MathButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Categories.this, MainActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("CAT_KEY","MATH");
+                intent.putExtras(bundle);
+                startActivityForResult(intent,WORD_REQUEST_CODE);
+            }
+        }); //MathButton Listener
+
+        final Button OliviaPButton = findViewById(R.id.button_olivias_privileges);
+        OliviaPButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Categories.this, MainActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("CAT_KEY","OLIVIAPRIV");
+                intent.putExtras(bundle);
+                startActivityForResult(intent,WORD_REQUEST_CODE);
+            }
+        }); //OliviaPButton Listener
+
+        final Button SpeechLangButton = findViewById(R.id.button_speech_language);
+        SpeechLangButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Categories.this, MainActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("CAT_KEY","SPEECHLANG");
+                intent.putExtras(bundle);
+                startActivityForResult(intent,WORD_REQUEST_CODE);
+            }
+        }); //SpeechLangButton Listener
+
+        final Button SensoryButton = findViewById(R.id.button_sensory);
+        SensoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Categories.this, MainActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("CAT_KEY","SENSORY");
+                intent.putExtras(bundle);
+                startActivityForResult(intent,WORD_REQUEST_CODE);
+            }
+        }); //SensoryButton Listener
+
+        final Button FineMotorButton = findViewById(R.id.button_fine_motor);
+        FineMotorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Categories.this, MainActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("CAT_KEY","FINEMOTOR");
+                intent.putExtras(bundle);
+                startActivityForResult(intent,WORD_REQUEST_CODE);
+            }
+        }); //FineMotorButton Listener
+
+        final Button PeopleButton = findViewById(R.id.button_people);
+        PeopleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Categories.this, MainActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("CAT_KEY","PEOPLE");
+                intent.putExtras(bundle);
+                startActivityForResult(intent,WORD_REQUEST_CODE);
+            }
+        }); //PeopleButton Listener
+
+        final Button SocialEmotButton = findViewById(R.id.button_social_emotional);
+        SocialEmotButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Categories.this, MainActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("CAT_KEY","SOCIALEMOT");
+                intent.putExtras(bundle);
+                startActivityForResult(intent,WORD_REQUEST_CODE);
+            }
+        }); //SocialEmotButton Listener
+
+        final Button PlacesButton = findViewById(R.id.button_places);
+        PlacesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Categories.this, MainActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("CAT_KEY","PLACES");
+                intent.putExtras(bundle);
+                startActivityForResult(intent,WORD_REQUEST_CODE);
+            }
+        }); //PlacesButton Listener
+
         final Button OtherButton = findViewById(R.id.button_other);
         OtherButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +193,7 @@ public class Categories extends AppCompatActivity {
                 intent.putExtras(bundle);
                 startActivityForResult(intent,WORD_REQUEST_CODE);
             }
-        }); //FoodButton Listener
+        }); //OtherButton Listener
     }//OnCreate
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

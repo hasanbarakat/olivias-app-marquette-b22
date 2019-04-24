@@ -54,7 +54,7 @@ limitations under the License. -->
                 android:text="Take Picture"
                 android:textColor="@color/buttonLabel" />
 
-            <Button
+           <!-- <Button
                 android:id="@+id/button_getPic_from_gallery"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -63,7 +63,7 @@ limitations under the License. -->
                 android:background="@color/colorPrimary"
                 android:text="Choose Picture From Gallery"
                 android:textColor="@color/buttonLabel" />
-
+            -->
         </LinearLayout>
 
         <Button

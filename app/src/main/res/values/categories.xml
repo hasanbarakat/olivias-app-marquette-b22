@@ -4,6 +4,15 @@
         <item>Basic</item>
         <item>Play</item>
         <item>Food</item>
+        <item>Reading</item>
+        <item>Math</item>
+        <item>Privileges</item>
+        <item>Speech and Language</item>
+        <item>Fine Motor</item>
+        <item>Sensory</item>
+        <item>People</item>
+        <item>Places</item>
+        <item>Social/Emotional</item>
         <item>Other</item>
     </string-array>
 </resources>

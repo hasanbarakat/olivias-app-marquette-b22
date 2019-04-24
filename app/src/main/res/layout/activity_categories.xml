@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Categories">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|left"
+        android:orientation="vertical">
 
-        <Button
+    <Button
             android:id="@+id/button_all"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,9 +32,54 @@
             android:layout_height="wrap_content"
             android:text="Food" />
         <Button
+            android:id="@+id/button_reading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reading" />
+        <Button
+            android:id="@+id/button_math"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Math" />
+        <Button
+            android:id="@+id/button_olivias_privileges"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Privileges" />
+        <Button
+            android:id="@+id/button_speech_language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Speech and Language" />
+        <Button
+            android:id="@+id/button_fine_motor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fine Motor" />
+        <Button
+            android:id="@+id/button_sensory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sensory" />
+        <Button
+            android:id="@+id/button_people"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="People" />
+        <Button
+            android:id="@+id/button_places"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Places" />
+        <Button
+            android:id="@+id/button_social_emotional"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Social/Emotional" />
+        <Button
             android:id="@+id/button_other"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Other" />
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+</ScrollView>

@@ -6,9 +6,14 @@
     android:icon="@drawable/reset"
     android:title="Reset"
     app:showAsAction="always"/>
-    <!--<item
-        android:id="@+id/database_edit_button"
-        android:icon="@drawable/gallery_edit"
-        android:title="Gallery"
-        app:showAsAction="always"/>-->
+    <item
+        android:id="@+id/connect_to_base"
+        android:icon="@drawable/base"
+        android:title="Connect to Base"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/settings"
+        android:title="Bluetooth Test"
+        app:showAsAction="never"/>
 </menu>

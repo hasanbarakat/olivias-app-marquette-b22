@@ -33,6 +33,15 @@ class WordRepository {
     private String CAT_BASIC = "Basic";
     private String CAT_PLAY = "Play";
     private String CAT_FOOD = "Food";
+    private String CAT_READING = "Reading";
+    private String CAT_MATH = "Math";
+    private String CAT_O_P = "Privileges";
+    private String CAT_SPEECH_LANG = "Speech and Language";
+    private String CAT_FINE_MOTOR = "Fine Motor";
+    private String CAT_SENSORY = "Sensory";
+    private String CAT_PEOPLE = "People";
+    private String CAT_PLACES = "Places";
+    private String CAT_SOCIAL_EMOT = "Social/Emotional";
     private String CAT_OTHER = "Other";
 
     private WordDao mWordDao;
@@ -41,6 +50,15 @@ class WordRepository {
     private LiveData<List<Word>> mBasicCatWords;
     private LiveData<List<Word>> mPlayCatWords;
     private LiveData<List<Word>> mFoodCatWords;
+    private LiveData<List<Word>> mReadingCatWords;
+    private LiveData<List<Word>> mMathCatWords;
+    private LiveData<List<Word>> mOPCatWords;
+    private LiveData<List<Word>> mSpeechLangCatWords;
+    private LiveData<List<Word>> mFineMotorCatWords;
+    private LiveData<List<Word>> mSensoryCatWords;
+    private LiveData<List<Word>> mPeopleCatWords;
+    private LiveData<List<Word>> mPlacesCatWords;
+    private LiveData<List<Word>> mSocialEmotCatWords;
     private LiveData<List<Word>> mOtherCatWords;
 
     // Note that in order to unit test the WordRepository, you have to remove the Application
@@ -56,6 +74,15 @@ class WordRepository {
         mPlayCatWords = mWordDao.findWordInCategory(CAT_PLAY);
         mFoodCatWords = mWordDao.findWordInCategory(CAT_FOOD);
         mOtherCatWords = mWordDao.findWordInCategory(CAT_OTHER);
+        mReadingCatWords = mWordDao.findWordInCategory(CAT_READING);
+        mMathCatWords = mWordDao.findWordInCategory(CAT_MATH);
+        mOPCatWords = mWordDao.findWordInCategory(CAT_O_P);
+        mSpeechLangCatWords = mWordDao.findWordInCategory(CAT_SPEECH_LANG);
+        mFineMotorCatWords = mWordDao.findWordInCategory(CAT_FINE_MOTOR);
+        mSensoryCatWords = mWordDao.findWordInCategory(CAT_SENSORY);
+        mPeopleCatWords = mWordDao.findWordInCategory(CAT_PEOPLE);
+        mPlacesCatWords = mWordDao.findWordInCategory(CAT_PLACES);
+        mSocialEmotCatWords = mWordDao.findWordInCategory(CAT_SOCIAL_EMOT);
     }
 
     // Room executes all queries on a separate thread.
@@ -73,9 +100,38 @@ class WordRepository {
     LiveData<List<Word>> getmFoodCatWords() {
         return mFoodCatWords;
     }
+    LiveData<List<Word>> getmReadingCatWords() {
+        return mReadingCatWords;
+    }
+    LiveData<List<Word>> getmMathCatWords() {
+        return mMathCatWords;
+    }
+    LiveData<List<Word>> getmOPCatWords() {
+        return mOPCatWords;
+    }
+    LiveData<List<Word>> getmSpeechLangCatWords() {
+        return mSpeechLangCatWords;
+    }
+    LiveData<List<Word>> getmFineMotorCatWords() {
+        return mFineMotorCatWords;
+    }
+    LiveData<List<Word>> getmSensoryCatWords() {
+        return mSensoryCatWords;
+    }
+    LiveData<List<Word>> getmPeopleCatWords() {
+        return mPeopleCatWords;
+    }
+    LiveData<List<Word>> getmPlacesCatWords() {
+        return mPlacesCatWords;
+    }
+    LiveData<List<Word>> getmSocialEmotCatWords() {
+        return mSocialEmotCatWords;
+    }
     LiveData<List<Word>> getmOtherCatWords() {
         return mOtherCatWords;
     }
+
+
     // You must call this on a non-UI thread or your app will crash.
     // Like this, Room ensures that you're not doing any long running operations on the main
     // thread, blocking the UI.

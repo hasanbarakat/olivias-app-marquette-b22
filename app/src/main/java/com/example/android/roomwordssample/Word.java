@@ -84,22 +84,5 @@ public class Word {
 
         return this.mThumbnail;
     }
-/*
 
-    @NonNull
-    public String setWord() {
-        return mWord;
-    }
-
-    @NonNull
-    public String setCategory() {
-        return mCategory;
-    }
-
-    @NonNull
-    public String setPic() {
-
-        return mPic;
-    }
-    */
 }

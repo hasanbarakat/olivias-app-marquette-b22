@@ -124,7 +124,133 @@ public class MainActivity extends AppCompatActivity implements WordListAdapter.O
                     //   Toast.LENGTH_LONG).show();
                 }
             });
-        } //Else if play
+        } //Else if food
+        else if(chosenCat.equals("READING")) {
+            mWordViewModel.getReadingCatWords().observe(this, new Observer<List<Word>>() {
+                @Override
+                public void onChanged(@Nullable final List<Word> words) {
+                    // Update the cached copy of the words in the adapter.
+                    adapter.setWords(words);
+                    setTitle("Reading");
+                    // Toast.makeText(
+                    //       getApplicationContext(),
+                    //     "Category 2",
+                    //   Toast.LENGTH_LONG).show();
+                }
+            });
+        } //Else if reading
+        else if(chosenCat.equals("MATH")) {
+            mWordViewModel.getMathCatWords().observe(this, new Observer<List<Word>>() {
+                @Override
+                public void onChanged(@Nullable final List<Word> words) {
+                    // Update the cached copy of the words in the adapter.
+                    adapter.setWords(words);
+                    setTitle("Math");
+                    // Toast.makeText(
+                    //       getApplicationContext(),
+                    //     "Category 2",
+                    //   Toast.LENGTH_LONG).show();
+                }
+            });
+        } //Else if math
+        else if(chosenCat.equals("OLIVIAPRIV")) {
+            mWordViewModel.getOPCatWords().observe(this, new Observer<List<Word>>() {
+                @Override
+                public void onChanged(@Nullable final List<Word> words) {
+                    // Update the cached copy of the words in the adapter.
+                    adapter.setWords(words);
+                    setTitle("Privileges");
+                    // Toast.makeText(
+                    //       getApplicationContext(),
+                    //     "Category 2",
+                    //   Toast.LENGTH_LONG).show();
+                }
+            });
+        } //Else if Olivia's Privileges
+        else if(chosenCat.equals("SPEECHLANG")) {
+            mWordViewModel.getSpeechLangCatWords().observe(this, new Observer<List<Word>>() {
+                @Override
+                public void onChanged(@Nullable final List<Word> words) {
+                    // Update the cached copy of the words in the adapter.
+                    adapter.setWords(words);
+                    setTitle("Speech and Language");
+                    // Toast.makeText(
+                    //       getApplicationContext(),
+                    //     "Category 2",
+                    //   Toast.LENGTH_LONG).show();
+                }
+            });
+        } //Else if Speech and Language
+        else if(chosenCat.equals("SENSORY")) {
+            mWordViewModel.getSensoryCatWords().observe(this, new Observer<List<Word>>() {
+                @Override
+                public void onChanged(@Nullable final List<Word> words) {
+                    // Update the cached copy of the words in the adapter.
+                    adapter.setWords(words);
+                    setTitle("Sensory");
+                    // Toast.makeText(
+                    //       getApplicationContext(),
+                    //     "Category 2",
+                    //   Toast.LENGTH_LONG).show();
+                }
+            });
+        } //Else if Sensory
+        else if(chosenCat.equals("FINEMOTOR")) {
+            mWordViewModel.getFineMotorCatWords().observe(this, new Observer<List<Word>>() {
+                @Override
+                public void onChanged(@Nullable final List<Word> words) {
+                    // Update the cached copy of the words in the adapter.
+                    adapter.setWords(words);
+                    setTitle("Fine Motor");
+                    // Toast.makeText(
+                    //       getApplicationContext(),
+                    //     "Category 2",
+                    //   Toast.LENGTH_LONG).show();
+                }
+            });
+        } //Else if Fine Motor
+        else if(chosenCat.equals("PEOPLE")) {
+            mWordViewModel.getPeopleCatWords().observe(this, new Observer<List<Word>>() {
+                @Override
+                public void onChanged(@Nullable final List<Word> words) {
+                    // Update the cached copy of the words in the adapter.
+                    adapter.setWords(words);
+                    setTitle("People");
+                    // Toast.makeText(
+                    //       getApplicationContext(),
+                    //     "Category 2",
+                    //   Toast.LENGTH_LONG).show();
+                }
+            });
+        } //Else if People
+        else if(chosenCat.equals("PLACES")) {
+            mWordViewModel.getPlacesCatWords().observe(this, new Observer<List<Word>>() {
+                @Override
+                public void onChanged(@Nullable final List<Word> words) {
+                    // Update the cached copy of the words in the adapter.
+                    adapter.setWords(words);
+                    setTitle("Places");
+                    // Toast.makeText(
+                    //       getApplicationContext(),
+                    //     "Category 2",
+                    //   Toast.LENGTH_LONG).show();
+                }
+            });
+        } //Else if Places
+        else if(chosenCat.equals("SOCIALEMOT")) {
+            mWordViewModel.getSocialEmotCatWords().observe(this, new Observer<List<Word>>() {
+                @Override
+                public void onChanged(@Nullable final List<Word> words) {
+                    // Update the cached copy of the words in the adapter.
+                    adapter.setWords(words);
+                    setTitle("Social/Emotional");
+                    // Toast.makeText(
+                    //       getApplicationContext(),
+                    //     "Category 2",
+                    //   Toast.LENGTH_LONG).show();
+                }
+            });
+        } //Else if Social/Emotional
         else if(chosenCat.equals("OTHER")) {
             mWordViewModel.getOtherCatWords().observe(this, new Observer<List<Word>>() {
                 @Override

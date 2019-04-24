@@ -38,6 +38,15 @@ public class WordViewModel extends AndroidViewModel {
     private LiveData<List<Word>> mBasicCatWords;
     private LiveData<List<Word>> mPlayCatWords;
     private LiveData<List<Word>> mFoodCatWords;
+    private LiveData<List<Word>> mReadingCatWords;
+    private LiveData<List<Word>> mMathCatWords;
+    private LiveData<List<Word>> mOPCatWords;
+    private LiveData<List<Word>> mSpeechLangCatWords;
+    private LiveData<List<Word>> mFineMotorCatWords;
+    private LiveData<List<Word>> mSensoryCatWords;
+    private LiveData<List<Word>> mPeopleCatWords;
+    private LiveData<List<Word>> mPlacesCatWords;
+    private LiveData<List<Word>> mSocialEmotCatWords;
     private LiveData<List<Word>> mOtherCatWords;
 
     public WordViewModel(Application application) {
@@ -48,6 +57,15 @@ public class WordViewModel extends AndroidViewModel {
         mPlayCatWords = mRepository.getmPlayCatWords();
         mFoodCatWords = mRepository.getmFoodCatWords();
         mOtherCatWords = mRepository.getmOtherCatWords();
+        mReadingCatWords = mRepository.getmReadingCatWords();
+        mMathCatWords = mRepository.getmMathCatWords();
+        mOPCatWords = mRepository.getmOPCatWords();
+        mSpeechLangCatWords = mRepository.getmSpeechLangCatWords();
+        mFineMotorCatWords = mRepository.getmFineMotorCatWords();
+        mSensoryCatWords = mRepository.getmSensoryCatWords();
+        mPeopleCatWords = mRepository.getmPeopleCatWords();
+        mPlacesCatWords = mRepository.getmPlacesCatWords();
+        mSocialEmotCatWords = mRepository.getmSocialEmotCatWords();
     }
 
     LiveData<List<Word>> getAllWords() {
@@ -63,6 +81,33 @@ public class WordViewModel extends AndroidViewModel {
     }
     LiveData<List<Word>> getFoodCatWords() {
         return mFoodCatWords;
+    }
+    LiveData<List<Word>> getReadingCatWords() {
+        return mReadingCatWords;
+    }
+    LiveData<List<Word>> getMathCatWords() {
+        return mMathCatWords;
+    }
+    LiveData<List<Word>> getOPCatWords() {
+        return mOPCatWords;
+    }
+    LiveData<List<Word>> getSpeechLangCatWords() {
+        return mSpeechLangCatWords;
+    }
+    LiveData<List<Word>> getFineMotorCatWords() {
+        return mFineMotorCatWords;
+    }
+    LiveData<List<Word>> getSensoryCatWords() {
+        return mSensoryCatWords;
+    }
+    LiveData<List<Word>> getPeopleCatWords() {
+        return mPeopleCatWords;
+    }
+    LiveData<List<Word>> getPlacesCatWords() {
+        return mPlacesCatWords;
+    }
+    LiveData<List<Word>> getSocialEmotCatWords() {
+        return mSocialEmotCatWords;
     }
     LiveData<List<Word>> getOtherCatWords() {
         return mOtherCatWords;
