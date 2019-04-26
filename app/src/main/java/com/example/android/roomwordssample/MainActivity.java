@@ -266,14 +266,14 @@ public class MainActivity extends AppCompatActivity implements WordListAdapter.O
             });
         } //Else if play
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+       /* FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, NewWordActivity.class);
                 startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
             }
-        });
+        });*/
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

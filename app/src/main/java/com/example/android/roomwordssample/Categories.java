@@ -1,13 +1,17 @@
 package com.example.android.roomwordssample;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import static com.example.android.roomwordssample.MainActivity.NEW_WORD_ACTIVITY_REQUEST_CODE;
 //Create Intent
 //Create a bundle
 //Send bundle
@@ -18,12 +22,20 @@ public class Categories extends AppCompatActivity {
 
     public static final int WORD_REQUEST_CODE = 11;
     public static final String PIC_REPLY = "com.example.android.wordlistsql.PICSELECTION";
+    public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 2;
+
+
+
+    private WordViewModel mWordViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
         setTitle("Library");
+
+        // Get a new or existing ViewModel from the ViewModelProvider.
+        mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
 
         //Buttons for Categories
 
@@ -194,6 +206,16 @@ public class Categories extends AppCompatActivity {
                 startActivityForResult(intent,WORD_REQUEST_CODE);
             }
         }); //OtherButton Listener
+
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Categories.this, NewWordActivity.class);
+                startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+            }
+        });
     }//OnCreate
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -206,6 +228,14 @@ public class Categories extends AppCompatActivity {
             replyIntent.putExtra(PIC_REPLY, data.getStringExtra(MainActivity.SELECTION_REPLY));
             setResult(RESULT_OK, replyIntent);
             finish();
+        }
+
+        else if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            //Word word = new Word(data.getStringExtra(NewWordActivity.WORD_REPLY));
+            //Word word = new Word(data.getStringExtra(NewWordActivity.WORD_REPLY),data.getStringExtra(NewWordActivity.CAT_REPLY));
+            Word word = new Word(data.getStringExtra(NewWordActivity.WORD_REPLY),data.getStringExtra(NewWordActivity.CAT_REPLY), data.getStringExtra(NewWordActivity.PIC_REPLY),data.getStringExtra(NewWordActivity.THUMB_REPLY));
+
+            mWordViewModel.insert(word);
         }
 
         else {
