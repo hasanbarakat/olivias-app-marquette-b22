@@ -11,9 +11,10 @@
         android:icon="@drawable/base"
         android:title="Connect to Base"
         app:showAsAction="always"/>
+    <!--
     <item
         android:id="@+id/settings"
         android:icon="@drawable/settings"
         android:title="Bluetooth Test"
-        app:showAsAction="never"/>
+        app:showAsAction="never"/> -->
 </menu>

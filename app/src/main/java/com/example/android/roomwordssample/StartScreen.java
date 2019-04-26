@@ -230,10 +230,10 @@ public class StartScreen extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), "Reset", Toast.LENGTH_SHORT).show();
 
                 return true;
-            case R.id.settings:
+            /*case R.id.settings:
                 Intent settingsIntent = new Intent(StartScreen.this, Settings.class);
                 startActivity(settingsIntent);
-                return true;
+                return true;*/
             case R.id.connect_to_base:
                 if(mBTSocket != null)
                 {
