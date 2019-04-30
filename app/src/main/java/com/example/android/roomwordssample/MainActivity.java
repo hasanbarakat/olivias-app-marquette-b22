@@ -16,9 +16,13 @@ package com.example.android.roomwordssample;
  * limitations under the License.
  */
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -37,13 +41,20 @@ import android.widget.GridLayout;
 
 import java.util.List;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 
-public class MainActivity extends AppCompatActivity implements WordListAdapter.OnWordListener {
+
+public class MainActivity extends AppCompatActivity implements WordListAdapter.OnWordListener, DeleteOptionDialog.DeleteOptionDialogListener {
 
     public static final String SELECTION_REPLY = "com.example.android.wordlistsql.SELECTION";
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
 
     private WordViewModel mWordViewModel;
+
+    public boolean deleteCONFIRM = FALSE;
+
+    Word deleteWord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +64,10 @@ public class MainActivity extends AppCompatActivity implements WordListAdapter.O
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+       if(getIntent().getAction().contains("DELETE"))
+        {
+            toolbar.setBackgroundColor(getResources().getColor(R.color.deleteColor));
+        }
         //RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true); //Line to improve performance
@@ -297,16 +312,73 @@ public class MainActivity extends AppCompatActivity implements WordListAdapter.O
     public void onWordClick(Word clicked) {
         //Navigate to new activity
         //Use intent
+
+
+        if(getIntent().getAction().contains("CHOOSE")) {
+            Toast.makeText(
+                    getApplicationContext(),
+                    clicked.getWord(),
+                    Toast.LENGTH_LONG).show();
+
+            Intent replyIntent = new Intent();
+            replyIntent.putExtra(SELECTION_REPLY, clicked.getPicture());
+            setResult(RESULT_OK, replyIntent);
+            finish();
+        }
+        else if(getIntent().getAction().contains("DELETE"))
+        {
+            deleteWord = clicked;
+
+            showNoticeDialog(clicked.getWord());
+            /*
+            if(deleteCONFIRM == TRUE) {
+                mWordViewModel.delete(clicked);
+                Toast.makeText(
+                        getApplicationContext(),
+                        clicked.getWord() + " Deleted",
+                        Toast.LENGTH_LONG).show();
+                mWordViewModel.delete(clicked);
+                */
+
+                //finish();
+            }
+
+        }
+
+
+    public void showNoticeDialog(String name) {
+        // Create an instance of the dialog fragment and show it
+        DialogFragment dialog = new DeleteOptionDialog();
+
+        Bundle args = new Bundle();
+        args.putString("name",name);
+        dialog.setArguments(args);
+
+        dialog.show(getFragmentManager(), "DeleteOptionDialog");
+    }
+
+    // The dialog fragment receives a reference to this Activity through the
+    // Fragment.onAttach() callback, which it uses to call the following methods
+    // defined by the NoticeDialogFragment.NoticeDialogListener interface
+    @Override
+    public void onDialogPositiveClick() {
+        mWordViewModel.delete(deleteWord);
         Toast.makeText(
                 getApplicationContext(),
-                clicked.getWord(),
+              "Deleted " + deleteWord.getWord(),
                 Toast.LENGTH_LONG).show();
 
         Intent replyIntent = new Intent();
-        replyIntent.putExtra(SELECTION_REPLY, clicked.getPicture());
         setResult(RESULT_OK, replyIntent);
         finish();
-
-
     }
+
+    @Override
+    public void onDialogNegativeClick() {
+        Toast.makeText(
+                getApplicationContext(),
+                "Canceled Deleting Option",
+                Toast.LENGTH_LONG).show();
+    }
+
 }

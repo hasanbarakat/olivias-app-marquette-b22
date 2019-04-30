@@ -21,7 +21,9 @@ public class Categories extends AppCompatActivity {
     public static final int CAT_KEY = 1;
 
     public static final int WORD_REQUEST_CODE = 11;
+    public static final int DELETE_REQUEST_CODE = 12;
     public static final String PIC_REPLY = "com.example.android.wordlistsql.PICSELECTION";
+    public static final String DELETE_REPLY = "com.example.android.wordlistsql.DELETESELECTION";
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 2;
 
 
@@ -37,6 +39,8 @@ public class Categories extends AppCompatActivity {
         // Get a new or existing ViewModel from the ViewModelProvider.
         mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
 
+
+
         //Buttons for Categories
 
         final Button allButton = findViewById(R.id.button_all);
@@ -47,7 +51,18 @@ public class Categories extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("CAT_KEY","ALL");
                 intent.putExtras(bundle);
-                startActivityForResult(intent,WORD_REQUEST_CODE);
+
+                if(getIntent().getAction().contains("CHOOSE"))
+                {
+                    intent.setAction("CHOOSE");
+                    startActivityForResult(intent,WORD_REQUEST_CODE);
+                }
+                else if(getIntent().getAction().contains("DELETE"))
+                {
+                    intent.setAction("DELETE");
+                    startActivityForResult(intent,DELETE_REQUEST_CODE);
+                }
+
             }
         }); //allButton Listener
 
@@ -59,7 +74,18 @@ public class Categories extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("CAT_KEY","BASIC");
                 intent.putExtras(bundle);
-                startActivityForResult(intent,WORD_REQUEST_CODE);
+
+                if(getIntent().getAction().contains("CHOOSE"))
+                {
+                    intent.setAction("CHOOSE");
+                    startActivityForResult(intent,WORD_REQUEST_CODE);
+                }
+                else if(getIntent().getAction().contains("DELETE"))
+                {
+                    intent.setAction("DELETE");
+                    startActivityForResult(intent,DELETE_REQUEST_CODE);
+                }
+
             }
         }); //BasicButton Listener
 
@@ -71,7 +97,18 @@ public class Categories extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("CAT_KEY","PLAY");
                 intent.putExtras(bundle);
-                startActivityForResult(intent,WORD_REQUEST_CODE);
+
+                if(getIntent().getAction().contains("CHOOSE"))
+                {
+                    intent.setAction("CHOOSE");
+                    startActivityForResult(intent,WORD_REQUEST_CODE);
+                }
+                else if(getIntent().getAction().contains("DELETE"))
+                {
+                    intent.setAction("DELETE");
+                    startActivityForResult(intent,DELETE_REQUEST_CODE);
+                }
+
             }
         }); //PlayButton Listener
 
@@ -83,7 +120,18 @@ public class Categories extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("CAT_KEY","FOOD");
                 intent.putExtras(bundle);
-                startActivityForResult(intent,WORD_REQUEST_CODE);
+
+                if(getIntent().getAction().contains("CHOOSE"))
+                {
+                    intent.setAction("CHOOSE");
+                    startActivityForResult(intent,WORD_REQUEST_CODE);
+                }
+                else if(getIntent().getAction().contains("DELETE"))
+                {
+                    intent.setAction("DELETE");
+                    startActivityForResult(intent,DELETE_REQUEST_CODE);
+                }
+
             }
         }); //FoodButton Listener
 
@@ -95,7 +143,18 @@ public class Categories extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("CAT_KEY","READING");
                 intent.putExtras(bundle);
-                startActivityForResult(intent,WORD_REQUEST_CODE);
+
+                if(getIntent().getAction().contains("CHOOSE"))
+                {
+                    intent.setAction("CHOOSE");
+                    startActivityForResult(intent,WORD_REQUEST_CODE);
+                }
+                else if(getIntent().getAction().contains("DELETE"))
+                {
+                    intent.setAction("DELETE");
+                    startActivityForResult(intent,DELETE_REQUEST_CODE);
+                }
+
             }
         }); //ReadingButton Listener
 
@@ -107,7 +166,18 @@ public class Categories extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("CAT_KEY","MATH");
                 intent.putExtras(bundle);
-                startActivityForResult(intent,WORD_REQUEST_CODE);
+
+                if(getIntent().getAction().contains("CHOOSE"))
+                {
+                    intent.setAction("CHOOSE");
+                    startActivityForResult(intent,WORD_REQUEST_CODE);
+                }
+                else if(getIntent().getAction().contains("DELETE"))
+                {
+                    intent.setAction("DELETE");
+                    startActivityForResult(intent,DELETE_REQUEST_CODE);
+                }
+
             }
         }); //MathButton Listener
 
@@ -119,7 +189,18 @@ public class Categories extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("CAT_KEY","OLIVIAPRIV");
                 intent.putExtras(bundle);
-                startActivityForResult(intent,WORD_REQUEST_CODE);
+
+                if(getIntent().getAction().contains("CHOOSE"))
+                {
+                    intent.setAction("CHOOSE");
+                    startActivityForResult(intent,WORD_REQUEST_CODE);
+                }
+                else if(getIntent().getAction().contains("DELETE"))
+                {
+                    intent.setAction("DELETE");
+                    startActivityForResult(intent,DELETE_REQUEST_CODE);
+                }
+
             }
         }); //OliviaPButton Listener
 
@@ -131,7 +212,18 @@ public class Categories extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("CAT_KEY","SPEECHLANG");
                 intent.putExtras(bundle);
-                startActivityForResult(intent,WORD_REQUEST_CODE);
+
+                if(getIntent().getAction().contains("CHOOSE"))
+                {
+                    intent.setAction("CHOOSE");
+                    startActivityForResult(intent,WORD_REQUEST_CODE);
+                }
+                else if(getIntent().getAction().contains("DELETE"))
+                {
+                    intent.setAction("DELETE");
+                    startActivityForResult(intent,DELETE_REQUEST_CODE);
+                }
+
             }
         }); //SpeechLangButton Listener
 
@@ -143,7 +235,18 @@ public class Categories extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("CAT_KEY","SENSORY");
                 intent.putExtras(bundle);
-                startActivityForResult(intent,WORD_REQUEST_CODE);
+
+                if(getIntent().getAction().contains("CHOOSE"))
+                {
+                    intent.setAction("CHOOSE");
+                    startActivityForResult(intent,WORD_REQUEST_CODE);
+                }
+                else if(getIntent().getAction().contains("DELETE"))
+                {
+                    intent.setAction("DELETE");
+                    startActivityForResult(intent,DELETE_REQUEST_CODE);
+                }
+
             }
         }); //SensoryButton Listener
 
@@ -155,7 +258,18 @@ public class Categories extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("CAT_KEY","FINEMOTOR");
                 intent.putExtras(bundle);
-                startActivityForResult(intent,WORD_REQUEST_CODE);
+
+                if(getIntent().getAction().contains("CHOOSE"))
+                {
+                    intent.setAction("CHOOSE");
+                    startActivityForResult(intent,WORD_REQUEST_CODE);
+                }
+                else if(getIntent().getAction().contains("DELETE"))
+                {
+                    intent.setAction("DELETE");
+                    startActivityForResult(intent,DELETE_REQUEST_CODE);
+                }
+
             }
         }); //FineMotorButton Listener
 
@@ -167,7 +281,18 @@ public class Categories extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("CAT_KEY","PEOPLE");
                 intent.putExtras(bundle);
-                startActivityForResult(intent,WORD_REQUEST_CODE);
+
+                if(getIntent().getAction().contains("CHOOSE"))
+                {
+                    intent.setAction("CHOOSE");
+                    startActivityForResult(intent,WORD_REQUEST_CODE);
+                }
+                else if(getIntent().getAction().contains("DELETE"))
+                {
+                    intent.setAction("DELETE");
+                    startActivityForResult(intent,DELETE_REQUEST_CODE);
+                }
+
             }
         }); //PeopleButton Listener
 
@@ -179,7 +304,18 @@ public class Categories extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("CAT_KEY","SOCIALEMOT");
                 intent.putExtras(bundle);
-                startActivityForResult(intent,WORD_REQUEST_CODE);
+
+                if(getIntent().getAction().contains("CHOOSE"))
+                {
+                    intent.setAction("CHOOSE");
+                    startActivityForResult(intent,WORD_REQUEST_CODE);
+                }
+                else if(getIntent().getAction().contains("DELETE"))
+                {
+                    intent.setAction("DELETE");
+                    startActivityForResult(intent,DELETE_REQUEST_CODE);
+                }
+
             }
         }); //SocialEmotButton Listener
 
@@ -191,7 +327,18 @@ public class Categories extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("CAT_KEY","PLACES");
                 intent.putExtras(bundle);
-                startActivityForResult(intent,WORD_REQUEST_CODE);
+
+                if(getIntent().getAction().contains("CHOOSE"))
+                {
+                    intent.setAction("CHOOSE");
+                    startActivityForResult(intent,WORD_REQUEST_CODE);
+                }
+                else if(getIntent().getAction().contains("DELETE"))
+                {
+                    intent.setAction("DELETE");
+                    startActivityForResult(intent,DELETE_REQUEST_CODE);
+                }
+
             }
         }); //PlacesButton Listener
 
@@ -203,12 +350,27 @@ public class Categories extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("CAT_KEY","OTHER");
                 intent.putExtras(bundle);
-                startActivityForResult(intent,WORD_REQUEST_CODE);
+
+                if(getIntent().getAction().contains("CHOOSE"))
+                {
+                    intent.setAction("CHOOSE");
+                    startActivityForResult(intent,WORD_REQUEST_CODE);
+                }
+                else if(getIntent().getAction().contains("DELETE"))
+                {
+                    intent.setAction("DELETE");
+                    startActivityForResult(intent,DELETE_REQUEST_CODE);
+                }
+
             }
         }); //OtherButton Listener
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
+        if(getIntent().getAction().contains("DELETE"))
+        {
+            fab.setVisibility(View.INVISIBLE);
+        }
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -229,7 +391,10 @@ public class Categories extends AppCompatActivity {
             setResult(RESULT_OK, replyIntent);
             finish();
         }
-
+        if (requestCode == DELETE_REQUEST_CODE && resultCode == RESULT_OK) {
+            setResult(RESULT_OK, replyIntent);
+            finish();
+        }
         else if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             //Word word = new Word(data.getStringExtra(NewWordActivity.WORD_REPLY));
             //Word word = new Word(data.getStringExtra(NewWordActivity.WORD_REPLY),data.getStringExtra(NewWordActivity.CAT_REPLY));
@@ -239,10 +404,10 @@ public class Categories extends AppCompatActivity {
         }
 
         else {
-            Toast.makeText(
+            /*Toast.makeText(
                     getApplicationContext(),
                     "Canceled",
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_LONG).show();*/
         }
     } //onActivityResult
 }

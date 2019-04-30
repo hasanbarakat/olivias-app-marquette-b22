@@ -11,6 +11,11 @@
         android:icon="@drawable/base"
         android:title="Connect to Base"
         app:showAsAction="always"/>
+    <item
+        android:id="@+id/delete_option"
+        android:icon="@drawable/trash"
+        android:title="Delete Option"
+        app:showAsAction="never" />
     <!--
     <item
         android:id="@+id/settings"

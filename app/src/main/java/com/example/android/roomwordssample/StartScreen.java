@@ -1,5 +1,6 @@
 package com.example.android.roomwordssample;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -33,7 +34,7 @@ public class StartScreen extends AppCompatActivity {
 
     public static final int WORD_1_REQUEST_CODE = 2;
     public static final int WORD_2_REQUEST_CODE = 3;
-
+    public static final int DELETE_WORD_CODE = 4;
 
     ImageButton option1Button;
     ImageButton option2Button;
@@ -60,6 +61,8 @@ public class StartScreen extends AppCompatActivity {
     final String name = "Tablet";
     private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); // "random" unique identifier
 
+    private WordViewModel mWordViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +70,8 @@ public class StartScreen extends AppCompatActivity {
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+
+        mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
 
         imageBitmap1 = BitmapFactory.decodeResource(getResources(),R.drawable.icon1);
         imageBitmap2 = BitmapFactory.decodeResource(getResources(),R.drawable.icon2);
@@ -87,6 +92,7 @@ public class StartScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(StartScreen.this, Categories.class);
+                intent1.setAction("CHOOSE");
                 startActivityForResult(intent1, WORD_1_REQUEST_CODE);
             }
         }); //Option1Label Listener
@@ -96,6 +102,7 @@ public class StartScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent2 = new Intent(StartScreen.this, Categories.class);
+                intent2.setAction("CHOOSE");
                 startActivityForResult(intent2, WORD_2_REQUEST_CODE);
             }
         }); //Option1Label Listener
@@ -197,11 +204,16 @@ public class StartScreen extends AppCompatActivity {
             //Set Image
             option2Button.setImageBitmap(imageBitmap2);
         }
+        else if(requestCode == DELETE_WORD_CODE && resultCode == RESULT_OK) {
+            //Delete Image
+            String imageDelete = data.getStringExtra(Categories.DELETE_REPLY);//Get Image name From Intent
+            //mWordViewModel.delete(imageDelete);
+        }
         else {
-            Toast.makeText(
+            /*Toast.makeText(
                     getApplicationContext(),
                     "Canceled",
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_LONG).show();*/
         }
     } //onActivityResult
 
@@ -250,6 +262,11 @@ public class StartScreen extends AppCompatActivity {
                 //else {
                     bluetoothConnectBase();
                 //}
+                return true;
+            case R.id.delete_option:
+                Intent deleteIntent = new Intent(StartScreen.this, Categories.class);
+                deleteIntent.setAction("DELETE");
+                startActivityForResult(deleteIntent, DELETE_WORD_CODE);
                 return true;
             default:
                 // If we got here, the user's action was not recognized.
