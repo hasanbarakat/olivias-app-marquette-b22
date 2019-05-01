@@ -1,23 +1,19 @@
 Olivia's App 
 ================
-This application is built using Google's Android Room with a View Codelab as a reference. 
+This repository contains the code for the application delivered to the client of Marquette University Engineering Senior Design Team B22.
 
-This repository contains the finished sample code for the
-[Architecture Components codelab](https://codelabs.developers.google.com/codelabs/android-room-with-a-view/index.html?index=..%2F..%2Findex#0) in Java on the master branch and in Kotlin for the [Architecture Components Kotlin codelab](https://codelabs.developers.google.com/codelabs/android-room-with-a-view-kotlin) on the [kotlin](https://github.com/googlecodelabs/android-room-with-a-view/tree/kotlin) branch.
+This application is built using Google's Android Room with a View Codelab as a reference. 
 
 Introduction
 ------------
+The purpose of this application is to provide the client with a set of two images depicting "options" for them to make a decision on. The application interfaces with a custom-built peripheral via Bluetooth to initiate the "decision". The client's care team is able to interact with a library of options library, choose a set of options, and present them to the client. The client is able to indicate her choice via the custom base.
 
-In May 2017 Google released the Architecture Components libraries.
-Each library manages and simplifies aspects of data persistence and the
-UI component lifecycle. Together, the libraries encourage a modular
-app architecture that results in reduced complexity and less code.
+This application utilizes Android's Room Persistance Library to create a backend database to hold an the pathname pointing to a high resolution image, pathname pointing to a thumbnail-sized copy of that high resolution image, its title, and its category. Each set of these parameters consitutes a "word" or "option" The database is queried based on hard-coded categories. 
 
-This sample shows how to use the libraries to build
-a complete basic app that implements the recommended architecture
-and can be used as a template for further explorations.
+Important notes: 
+*The Bluetooth Connection is hard-coded to the specific base originally deleivered to the client in May 2019. If a different base needs to be connected, the hard-coded MAC address needs to be changed.
 
-
+*This application was tested and delvivered on a Samsung Galaxy Tab S4.
 Pre-requisites
 --------------
 
@@ -26,7 +22,7 @@ Pre-requisites
 * Make sure Android Studio is updated, as well as your SDK and Gradle.
 Otherwise, you may have to wait for a while until all the updates are done.
 
-* A device or emulator that runs API level 26
+* A device or emulator that runs API level 26 or newer
 
 You need to be solidly familiar with the Java programming language,
 object-oriented design concepts, and Android Development Fundamentals.
@@ -35,6 +31,7 @@ In particular:
 * RecyclerView and Adapters
 * SQLite database and the SQLite query language
 * Threading and AsyncTask
+* Bluetooth Implementation
 * It helps to be familiar with software architectural patterns that separate
   data from the user interface, such as MVP or MVC. This codelab implements the
   architecture defined in the
@@ -46,11 +43,11 @@ Getting Started
 
 1. [Install Android Studio](https://developer.android.com/studio/install.html),
 if you don't already have it.
-2. Download the sample.
-2. Import the sample into Android Studio.
-3. Build and run the sample.
+2. Download the app repository
+2. Import into Android Studio.
+3. Build and run the app.
 
-License
+License for Original Google CodeLab
 -------
 
 Copyright 2017 Google, Inc.
